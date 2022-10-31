@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-@Component({
-  selector: 'app-graphlq.service',
-  templateUrl: './graphlq.service.component.html',
-  styleUrls: ['./graphlq.service.component.css']
+
+@Injectable({
+  providedIn: 'root'
 })
-export class GraphlqServiceComponent implements OnInit {
+export class GraphlqService {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
+
 
 }

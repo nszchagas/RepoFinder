@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Repository} from '../../../types/repository';
 
 @Component({
@@ -6,7 +6,7 @@ import {Repository} from '../../../types/repository';
   templateUrl: './default-table.component.html',
   styleUrls: ['./default-table.component.css']
 })
-export class DefaultTableComponent implements OnInit {
+export class DefaultTableComponent {
 
 
   //@FIXME: remove hardcoded data after configuring requests to API.
@@ -14,20 +14,17 @@ export class DefaultTableComponent implements OnInit {
   public dataSource: Repository[] = [
     {
       lastCommit: new Date(),
-      arquivado: false, nome: 'Teste'
-    },{
+      arquivado: false, name: 'Teste'
+    }, {
       lastCommit: new Date(),
-      arquivado: true, nome: 'Segundo teste'
+      arquivado: true, name: 'Segundo teste'
     }
   ];
 
-  public displayedColumns: string[] = ['Nome', 'Data do último commit', 'Status'];
+  public displayedColumns: string[] = ['name', 'lastCommit', 'status'];
 
 
-  constructor() {
+  public getDisplayableDate(date: Date) {
+    return date.toLocaleDateString("pt-BR")
   }
-
-  ngOnInit(): void {
-  }
-
 }
