@@ -17,20 +17,20 @@
         <mat-form-field appearance="fill" class="col-lg-3 px-1">
           <mat-label>Último Commit</mat-label>
           <mat-date-range-input
-            [formGroup]="lastCommit"
+            [formGroup]="updatedAt"
             [rangePicker]="datePicker"
-            [comparisonStart]="lastCommit.value.start"
-            [comparisonEnd]="lastCommit.value.end"
+            [comparisonStart]="updatedAt.value.updatedAtStart"
+            [comparisonEnd]="updatedAt.value.updatedAtEnd"
           >
-            <input matStartDate placeholder="Data inicial" formControlName="start">
-            <input matEndDate placeholder="Data final" formControlName="end">
+            <input matStartDate placeholder="Data inicial" formControlName="updatedAtStart" >
+            <input matEndDate placeholder="Data final" formControlName="updatedAtEnd">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
           <mat-date-range-picker #datePicker></mat-date-range-picker>
         </mat-form-field>
 
         <div class="col-lg-3 px-1 d-flex">
-          <mat-radio-group formControlName="status" class="align-self-center">
+          <mat-radio-group formControlName="isArchived" class="align-self-center">
             <mat-radio-button value="true" class="px-2"> Arquivado</mat-radio-button>
             <mat-radio-button value="false" class="px-2"> Não arquivado</mat-radio-button>
           </mat-radio-group>

@@ -1,8 +1,4 @@
 import {Component} from '@angular/core';
-import {RepositoryGraphlqService} from './service/repository-graphlq.service';
-import {GraphQLRepositoryResponse} from '../types/graphQLRepositoryResponse';
-import {ApolloQueryResult} from '@apollo/client/core';
-import {Repository} from '../types/repository';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +7,5 @@ import {Repository} from '../types/repository';
 })
 export class AppComponent {
   title = 'repofinder';
-
-
 
 }

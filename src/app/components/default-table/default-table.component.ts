@@ -1,30 +1,36 @@
-import {Component, Input} from '@angular/core';
-import {Repository} from '../../../types/repository';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {Repository} from '../../../type/model/repository';
+import {formatDate, getLocaleDateFormat} from '@angular/common';
+import {MatSort} from '@angular/material/sort';
+import {RepositoryService} from '../../service/repository.service';
+import {RepositoryFilter} from '../../../type/filter/repository-filter';
 
 @Component({
   selector: 'app-default-table',
   templateUrl: './default-table.component.html',
   styleUrls: ['./default-table.component.css']
 })
-export class DefaultTableComponent {
+export class DefaultTableComponent implements AfterViewInit {
 
 
-  //@FIXME: remove hardcoded data after configuring requests to API.
   @Input()
-  public dataSource: Repository[] = [
-    {
-      lastCommit: new Date(),
-      arquivado: false, name: 'Teste'
-    }, {
-      lastCommit: new Date(),
-      arquivado: true, name: 'Segundo teste'
+  public dataSource: Repository[] = [];
+
+  @ViewChild('tableToSort') tableToSort = new MatSort()
+
+  public displayedColumns: string[] = ['name', 'updatedAt', 'isArchived'];
+
+  constructor(private readonly service: RepositoryService) {
+    const filter: RepositoryFilter = {
+      isArchived: false
+
     }
-  ];
-
-  public displayedColumns: string[] = ['name', 'lastCommit', 'status'];
-
-
-  public getDisplayableDate(date: Date) {
-    return date.toLocaleDateString("pt-BR")
+    service.filterList(this.dataSource, filter)
   }
+
+  ngAfterViewInit() {
+    // @TODO: arrumar o sort
+    // this.dataSource.sort = this.tableToSort;
+  }
+
 }

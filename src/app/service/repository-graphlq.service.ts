@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Apollo, Subscription} from 'apollo-angular';
 import {ApolloQueryResult, gql} from '@apollo/client/core';
-import {Repository} from '../../types/repository';
-import {GraphQLRepositoryResponse} from '../../types/graphQLRepositoryResponse';
+import {Repository} from '../../type/model/repository';
+import {GraphQLRepositoryResponse} from '../../type/model/graphQLRepositoryResponse';
 import {Observable} from 'rxjs';
 
 

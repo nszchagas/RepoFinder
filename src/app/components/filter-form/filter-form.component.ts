@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {RepositoryFilter} from '../../../type/filter/repository-filter';
 
 @Component({
   selector: 'app-filter-form',
@@ -9,8 +10,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 export class FilterFormComponent {
 
   public filterForm: FormGroup;
-  public lastCommit: FormGroup;
-  // public status: FormControl;
+  public updatedAt: FormGroup;
   public today = new Date();
   public month = this.today.getMonth();
   public year = this.today.getFullYear();
@@ -18,19 +18,27 @@ export class FilterFormComponent {
   constructor(private readonly formBuilder: FormBuilder) {
     this.filterForm = this.formBuilder.group({
       name: [null],
-      status: [null]
+      isArchived: [null]
     })
 
-    this.lastCommit = this.formBuilder.group({
-      start: [new Date()],
-      end: [new Date()]
+    this.updatedAt = this.formBuilder.group({
+      updatedAtStart: [null],
+      updatedAtEnd: [null]
     })
 
-    // this.status = new FormControl([null]);
+
+  }
+
+  get value() {
+    const filter: RepositoryFilter =
+      {...this.filterForm.value,
+        ...this.updatedAt.value}
+    console.log(filter);
+    return filter;
   }
 
   public btnClick() {
-    console.log({...this.filterForm.value, ...this.lastCommit.value});
+    console.log(this.value);
   }
 
 }
