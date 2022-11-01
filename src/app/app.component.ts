@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RepositoryGraphlqService} from './service/repository-graphlq.service';
+import {GraphQLRepositoryResponse} from '../types/graphQLRepositoryResponse';
+import {ApolloQueryResult} from '@apollo/client/core';
+import {Repository} from '../types/repository';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +12,6 @@ import {RepositoryGraphlqService} from './service/repository-graphlq.service';
 export class AppComponent {
   title = 'repofinder';
 
-  constructor(private readonly service: RepositoryGraphlqService) {
-  }
-  public busca() {
-    this.service.listRepositories(5);
-  }
+
+
 }

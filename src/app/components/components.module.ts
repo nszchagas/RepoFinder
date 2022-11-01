@@ -12,17 +12,20 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
   declarations: [
     DefaultTableComponent,
-    FilterFormComponent
+    FilterFormComponent,
+    HomePageComponent
   ],
-  exports: [
-    DefaultTableComponent,
-    FilterFormComponent
-  ],
+    exports: [
+        DefaultTableComponent,
+        FilterFormComponent,
+        HomePageComponent
+    ],
   imports: [
     CommonModule,
     MatTableModule,

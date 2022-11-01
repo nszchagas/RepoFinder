@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Apollo} from 'apollo-angular';
-import {gql} from '@apollo/client/core';
+import {Apollo, Subscription} from 'apollo-angular';
+import {ApolloQueryResult, gql} from '@apollo/client/core';
+import {Repository} from '../../types/repository';
+import {GraphQLRepositoryResponse} from '../../types/graphQLRepositoryResponse';
+import {Observable} from 'rxjs';
 
 
 const GET_REPOSITORIES = gql`
   query ($count: Int){
     viewer {
-      name,
       repositories(last: $count) {
         nodes {
           name,
@@ -27,21 +29,23 @@ export class RepositoryGraphlqService {
   }
 
 
-  public listRepositories(count: number) {
+  public listRepositories(count: number): Promise<ApolloQueryResult<GraphQLRepositoryResponse>> {
 
-    this.apollo.watchQuery<any>({
+    return this.apollo.watchQuery<any>({
       query: GET_REPOSITORIES,
       variables: {
         count: count
       }
-    }).valueChanges.subscribe({
-      next: ({data, loading}) => {
-        console.log(data);
-        console.log(loading);
-      },
-      error: (error) => console.log(error[0])
-    })
+    }).result()
   }
-
-
 }
+
+
+//.valueChanges.subscribe({
+//       next: ({data, loading}) => {
+//         const v = data as GraphQLRepositoryResponse;
+//         console.log(v.viewer.repositories.nodes);
+//         return v.viewer.repositories.nodes;
+//       },
+//       error: (error) => console.log(error[0])
+//     })
