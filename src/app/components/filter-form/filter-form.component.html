@@ -1,0 +1,53 @@
+<div class="row container-fluid d-flex">
+
+  <mat-card>
+
+    <form [formGroup]="filterForm">
+      <div class="row px-2">
+
+        <mat-form-field appearance="fill"
+                        class="col-lg-3 px-1">
+          <mat-label> Nome</mat-label>
+          <input matInput
+                 formControlName="name"
+          />
+        </mat-form-field>
+
+        <!--        @TODO: fix date presentation. -->
+        <mat-form-field appearance="fill" class="col-lg-3 px-1">
+          <mat-label>Último Commit</mat-label>
+          <mat-date-range-input
+            [formGroup]="lastCommit"
+            [rangePicker]="datePicker"
+            [comparisonStart]="lastCommit.value.start"
+            [comparisonEnd]="lastCommit.value.end"
+          >
+            <input matStartDate placeholder="Data inicial" formControlName="start">
+            <input matEndDate placeholder="Data final" formControlName="end">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #datePicker></mat-date-range-picker>
+        </mat-form-field>
+
+        <div class="col-lg-3 px-1 d-flex">
+          <mat-radio-group formControlName="status" class="align-self-center">
+            <mat-radio-button value="true" class="px-2"> Arquivado</mat-radio-button>
+            <mat-radio-button value="false" class="px-2"> Não arquivado</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+        <div class="col-lg-3 align-self-center">
+
+          <button mat-flat-button color="primary"
+                  (click)="btnClick()"
+          > Filtrar
+          </button>
+        </div>
+
+      </div>
+    </form>
+
+
+  </mat-card>
+</div>

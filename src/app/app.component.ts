@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RepositoryGraphlqService} from './service/repository-graphlq.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'repofinder';
+
+  constructor(private readonly service: RepositoryGraphlqService) {
+  }
+  public busca() {
+    this.service.listRepositories(5);
+  }
 }
