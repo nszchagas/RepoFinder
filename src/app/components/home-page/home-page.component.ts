@@ -1,12 +1,13 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {RepositoryGraphlqService} from '../../service/repository-graphlq.service';
-import {ApolloQueryResult} from '@apollo/client/core';
+import {ApolloError, ApolloQueryResult} from '@apollo/client/core';
 import {GraphQLRepositoryResponse} from '../../type/model/graphQLRepositoryResponse';
 import {Repository} from 'src/app/type/model/repository';
 import {FilterFormComponent} from '../filter-form/filter-form.component';
 import {Subscription} from 'rxjs';
 import {RepositoryFilter} from '../../type/filter/repository-filter';
 import {RepositoryService} from '../../service/repository.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-page',
@@ -16,11 +17,13 @@ import {RepositoryService} from '../../service/repository.service';
 export class HomePageComponent implements OnDestroy {
 
   public loading = true;
+  public showTable = false;
   public repositories: Repository[] = [];
   private allRepositories: Repository[] = [];
   private subscriptions: Subscription[] = [];
 
-  constructor(private readonly graphlqService: RepositoryGraphlqService,
+  constructor(private readonly snackBar: MatSnackBar,
+              private readonly graphlqService: RepositoryGraphlqService,
               private readonly service: RepositoryService) {
     this.graphlqService.listRepositories(100).then(
       (response: ApolloQueryResult<GraphQLRepositoryResponse>) => {
@@ -28,8 +31,13 @@ export class HomePageComponent implements OnDestroy {
         console.log(this.allRepositories);
         this.repositories = this.allRepositories;
         this.loading = response.loading;
+        this.showTable = true;
+
       }
-    )
+    ).catch((error: ApolloError) => {
+      this.loading = false;
+      this.openSnackBar(`Erro ao processar requisição.\n${error.message}`)
+    })
   }
 
   @ViewChild(FilterFormComponent)
@@ -40,6 +48,10 @@ export class HomePageComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  private openSnackBar(message: string) {
+    this.snackBar.open(message, 'Fechar', {duration: 1000});
   }
 
   private filterRepositories(filter: RepositoryFilter = {}) {

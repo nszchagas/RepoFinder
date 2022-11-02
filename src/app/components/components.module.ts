@@ -15,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {HomePageComponent} from './home-page/home-page.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatRadioModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class ComponentsModule {

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "config": "ts-node ./scripts/setenv.ts",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -20,13 +21,15 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@apollo/client": "^3.0.0",
     "apollo-angular": "^4.1.0",
     "bootstrap": "^5.2.2",
+    "dotenv": "^16.0.3",
+    "graphql": "^16",
     "rxjs": "~7.5.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "@apollo/client": "^3.0.0",
-    "graphql": "^16"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.7",
@@ -39,6 +42,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.7.2"
+    "typescript": "~4.7.2",
+    "yargs": "^17.6.0"
   }
 }
