@@ -40,7 +40,7 @@ jobs:
       
     steps:
         - name: Download artifacts created at previous job
-          if: sucess()
+          if: success()
           uses: actions/download-artifact@v1
           with: 
             name: deploy_dist
