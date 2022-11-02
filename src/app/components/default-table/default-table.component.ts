@@ -1,6 +1,5 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Repository} from '../../type/model/repository';
-import {MatSort} from '@angular/material/sort';
 import {RepositoryService} from '../../service/repository.service';
 import {RepositoryFilter} from '../../type/filter/repository-filter';
 
@@ -9,13 +8,12 @@ import {RepositoryFilter} from '../../type/filter/repository-filter';
   templateUrl: './default-table.component.html',
   styleUrls: ['./default-table.component.css']
 })
-export class DefaultTableComponent implements AfterViewInit {
+export class DefaultTableComponent {
 
 
   @Input()
   public dataSource: Repository[] = [];
 
-  @ViewChild('tableToSort') tableToSort = new MatSort()
 
   public displayedColumns: string[] = ['name', 'pushedAt', 'isArchived'];
 
@@ -26,9 +24,21 @@ export class DefaultTableComponent implements AfterViewInit {
     service.filterList(this.dataSource, filter)
   }
 
-  ngAfterViewInit() {
-    // @TODO: arrumar o sort
-    // this.dataSource.sort = this.tableToSort;
+  get sortedData(): Repository[] {
+    return this.dataSource?.slice();
   }
 
+  public sortTable(event: any) {
+    const active = event.active;
+    const direction = (event.direction === 'asc') ? -1 : 1;
+    return this.dataSource.sort((r1: Repository, r2: Repository) => {
+      if (active === 'name') {
+        return direction * (r1.name.localeCompare(r2.name));
+      } else if (active === 'pushedAt') {
+        return direction * (r1.pushedAt.getTime() - r2.pushedAt.getTime());
+      } else {
+        return 0;
+      }
+    })
+  }
 }

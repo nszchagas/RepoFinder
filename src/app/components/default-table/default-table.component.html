@@ -1,22 +1,23 @@
 <div class="row container-fluid d-flex">
   <table mat-table
          matSort
-         [dataSource]="dataSource"
-         #tableToSort="matSort">
+         (matSortChange)="sortTable($event)"
+         [dataSource]="sortedData"
+  >
     <caption> Repositórios públicos.</caption>
 
     <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header> Nome</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="name"> Nome</th>
       <td *matCellDef="let element" mat-cell> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="isArchived">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header> Status</th>
+      <th *matHeaderCellDef mat-header-cell> Status</th>
       <td *matCellDef="let element" mat-cell> {{element.isArchived ? 'Arquivado' : 'Não arquivado'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="pushedAt">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header> Data do Último Commit</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="pushedAt"> Data do Último Commit</th>
       <td *matCellDef="let element" mat-cell> {{element.pushedAt | date: 'dd/MM/yyyy' }} </td>
     </ng-container>
 
