@@ -13,12 +13,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Angular Deploy gh-pages Actions
-        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.1
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          github_access_token: $ {{ secrets.ACCESS_TOKEN }}
-          # build_configuration:
-          base_href: /nszchagas/
-          deploy_branch: master
-          angular_dist_build_folder: docs
+          node-version: '18'
+      - name: Install dependencies
+        run: npm run install
+      - name: Build
+        run: npm build
+      - name: Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/nszchagas
+          enable_jekyll: true
