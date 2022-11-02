@@ -28,7 +28,6 @@ export class HomePageComponent implements OnDestroy {
     this.graphlqService.listRepositories(100).then(
       (response: ApolloQueryResult<GraphQLRepositoryResponse>) => {
         this.allRepositories = this.mapResponse(response.data);
-        console.log(this.allRepositories);
         this.repositories = this.allRepositories;
         this.loading = response.loading;
         this.showTable = true;
@@ -60,8 +59,7 @@ export class HomePageComponent implements OnDestroy {
 
   private mapResponse(response: GraphQLRepositoryResponse): Repository[] {
     let nodes = response.viewer.repositories.nodes;
-    let repositories: Repository[] = nodes.map(node =>
-      ({...node, pushedAt: new Date(node.pushedAt)} as Repository))
-    return repositories;
+    return nodes.map(node =>
+      ({...node, pushedAt: new Date(node.pushedAt)} as Repository));
   }
 }

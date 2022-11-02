@@ -14,16 +14,12 @@ export class RepositoryService {
         const filterArchived = (filter.isArchived !== undefined && filter.isArchived !== null) ? repository.isArchived === filter.isArchived : true;
         let filterDate = true;
         if (filter.pushedAtStart) {
-          // console.log(filter.pushedAtStart);
-          // console.log(repository.pushedAt);
-          // console.log((this.compareDates(filter.pushedAtStart, repository.pushedAt) < 0));
-          filterDate = this.compareDates(filter.pushedAtStart, repository.pushedAt) < 0
+          filterDate = this.compareDates(filter.pushedAtStart, repository.pushedAt) <= 0
         }
         if (filter.pushedAtEnd) {
-          filterDate = this.compareDates(filter.pushedAtEnd, repository.pushedAt) > 0
+          filterDate = filterDate && this.compareDates(filter.pushedAtEnd, repository.pushedAt) >= 0
         }
-        // return filterVisibility && filterName && filterArchived && filterDate
-        return filterVisibility && filterName && filterArchived;
+      return filterVisibility && filterName && filterArchived && filterDate;
       }
     )
   }
@@ -32,7 +28,9 @@ export class RepositoryService {
 // zero if they're equal and a negative number if the first one is
 // greater.
   private compareDates(firstDate: Date, secondDate: Date) {
-    return firstDate.getTime().valueOf() - secondDate.getTime().valueOf()
+    const first = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate())
+    const second = new Date(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate())
+    return first.getTime().valueOf() - second.getTime().valueOf()
   }
 
 
