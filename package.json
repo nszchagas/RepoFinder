@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "config": "",
-    "start": "ts-node src/scripts/setenv.ts && ng serve",
-    "build": "ts-node src/scripts/setenv.ts && ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "node server.js",
+    "build": "ng build",
+    "postinstall" : "ts-node src/scripts/setenv.ts && ng build --aot --prod"  
+    
   },
   "private": true,
   "dependencies": {
@@ -22,9 +22,11 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@apollo/client": "^3.0.0",
+    "angular-cli-ghpages": "^1.0.3",
     "apollo-angular": "^4.1.0",
     "bootstrap": "^5.2.2",
     "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "graphql": "^16",
     "rxjs": "~7.5.0",
     "ts-node": "^10.9.1",
@@ -36,13 +38,14 @@
     "@angular/cli": "~14.2.7",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
-    "jasmine-core": "~4.3.0",
-    "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.7.2",
-    "yargs": "^17.6.0"
+    "typescript": "~4.7.2"
+  },
+  "engines": {
+    "node": "^18.12.0",
+    "npm": "^8.19.2"
   }
 }

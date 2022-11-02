@@ -3,10 +3,13 @@
 #env config
 src/environments
 
+
+
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
+.idea
 docs/
 dist/
 
