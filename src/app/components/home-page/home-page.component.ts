@@ -35,7 +35,7 @@ export class HomePageComponent implements OnDestroy {
       }
     ).catch((error: ApolloError) => {
       this.loading = false;
-      this.openSnackBar(`Erro ao processar requisição.\n${error.message}`)
+      this.openSnackBar(`Erro ao processar requisição.`)
     })
   }
 

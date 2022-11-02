@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  TOKEN: ${{ secrets.GRAPHQL_TOKEN }}
+  GRAPHQL_TOKEN: ${{ secrets.GRAPHQL_TOKEN }}
 
 jobs:
   build:
