@@ -6,7 +6,7 @@
     "config": "",
     "start": "node server.js",
     "build": "ng build",
-    "postinstall" : "ts-node src/scripts/setenv.ts && ng build --aot --prod"  
+    "postinstall" : "ng build --aot --prod"  
     
   },
   "private": true,
