@@ -12,7 +12,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
-import { HomePageComponent } from './home-page/home-page.component';
+import {HomePageComponent} from './home-page/home-page.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -21,11 +23,11 @@ import { HomePageComponent } from './home-page/home-page.component';
     FilterFormComponent,
     HomePageComponent
   ],
-    exports: [
-        DefaultTableComponent,
-        FilterFormComponent,
-        HomePageComponent
-    ],
+  exports: [
+    DefaultTableComponent,
+    FilterFormComponent,
+    HomePageComponent
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -37,9 +39,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatNativeDateModule,
     MatSlideToggleModule,
     MatRadioModule,
-    MatButtonModule
-
-
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ComponentsModule {

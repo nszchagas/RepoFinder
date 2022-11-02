@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Apollo, Subscription} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
 import {ApolloQueryResult, gql} from '@apollo/client/core';
-import {Repository} from '../../type/model/repository';
-import {GraphQLRepositoryResponse} from '../../type/model/graphQLRepositoryResponse';
-import {Observable} from 'rxjs';
+import {GraphQLRepositoryResponse} from '../type/model/graphQLRepositoryResponse';
 
 
 const GET_REPOSITORIES = gql`
@@ -12,7 +10,7 @@ const GET_REPOSITORIES = gql`
       repositories(last: $count) {
         nodes {
           name,
-          updatedAt,
+          pushedAt,
           visibility,
           isArchived
         }
@@ -28,9 +26,7 @@ export class RepositoryGraphlqService {
   constructor(private readonly apollo: Apollo) {
   }
 
-
   public listRepositories(count: number): Promise<ApolloQueryResult<GraphQLRepositoryResponse>> {
-
     return this.apollo.watchQuery<any>({
       query: GET_REPOSITORIES,
       variables: {
@@ -39,13 +35,3 @@ export class RepositoryGraphlqService {
     }).result()
   }
 }
-
-
-//.valueChanges.subscribe({
-//       next: ({data, loading}) => {
-//         const v = data as GraphQLRepositoryResponse;
-//         console.log(v.viewer.repositories.nodes);
-//         return v.viewer.repositories.nodes;
-//       },
-//       error: (error) => console.log(error[0])
-//     })

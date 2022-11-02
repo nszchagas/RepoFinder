@@ -1,48 +1,38 @@
-<div class="row container-fluid d-flex">
+<div class="container-fluid d-flex justify-content-center">
 
   <mat-card>
 
     <form [formGroup]="filterForm">
-      <div class="row px-2">
-
-        <mat-form-field appearance="fill"
-                        class="col-lg-3 px-1">
+      <div class="row px-2 py-0">
+        <mat-form-field appearance="outline"
+                        class="col-lg-6 px-1">
           <mat-label> Nome</mat-label>
           <input matInput
-                 formControlName="name"
-          />
+                 formControlName="name"/>
         </mat-form-field>
 
         <!--        @TODO: fix date presentation. -->
-        <mat-form-field appearance="fill" class="col-lg-3 px-1">
+        <mat-form-field appearance="outline" class="col-lg-6 px-1 ">
           <mat-label>Último Commit</mat-label>
           <mat-date-range-input
-            [formGroup]="updatedAt"
+            [comparisonEnd]="pushedAt.value.pushedAtEnd"
             [rangePicker]="datePicker"
-            [comparisonStart]="updatedAt.value.updatedAtStart"
-            [comparisonEnd]="updatedAt.value.updatedAtEnd"
+            [comparisonStart]="pushedAt.value.pushedAtStart"
+            [formGroup]="pushedAt"
           >
-            <input matStartDate placeholder="Data inicial" formControlName="updatedAtStart" >
-            <input matEndDate placeholder="Data final" formControlName="updatedAtEnd">
+            <input formControlName="pushedAtStart" matStartDate placeholder="Data inicial">
+            <input formControlName="pushedAtEnd" matEndDate placeholder="Data final">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
           <mat-date-range-picker #datePicker></mat-date-range-picker>
         </mat-form-field>
 
-        <div class="col-lg-3 px-1 d-flex">
-          <mat-radio-group formControlName="isArchived" class="align-self-center">
-            <mat-radio-button value="true" class="px-2"> Arquivado</mat-radio-button>
-            <mat-radio-button value="false" class="px-2"> Não arquivado</mat-radio-button>
+        <!--        @TODO: centralizar filtro arquivado. -->
+        <div class="row col-lg-12 px-1 py-2 d-flex justify-content-center">
+          <mat-radio-group class="align-self-center justify-content-center" formControlName="isArchived">
+            <mat-radio-button [value]="true" class="px-2"> Arquivado</mat-radio-button>
+            <mat-radio-button [value]="false" class="px-2"> Não arquivado</mat-radio-button>
           </mat-radio-group>
-        </div>
-
-
-        <div class="col-lg-3 align-self-center">
-
-          <button mat-flat-button color="primary"
-                  (click)="btnClick()"
-          > Filtrar
-          </button>
         </div>
 
       </div>

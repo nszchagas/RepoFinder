@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
-import {Repository} from '../../../type/model/repository';
-import {formatDate, getLocaleDateFormat} from '@angular/common';
+import {Repository} from '../../type/model/repository';
 import {MatSort} from '@angular/material/sort';
 import {RepositoryService} from '../../service/repository.service';
-import {RepositoryFilter} from '../../../type/filter/repository-filter';
+import {RepositoryFilter} from '../../type/filter/repository-filter';
 
 @Component({
   selector: 'app-default-table',
@@ -18,12 +17,11 @@ export class DefaultTableComponent implements AfterViewInit {
 
   @ViewChild('tableToSort') tableToSort = new MatSort()
 
-  public displayedColumns: string[] = ['name', 'updatedAt', 'isArchived'];
+  public displayedColumns: string[] = ['name', 'pushedAt', 'isArchived'];
 
   constructor(private readonly service: RepositoryService) {
     const filter: RepositoryFilter = {
       isArchived: false
-
     }
     service.filterList(this.dataSource, filter)
   }

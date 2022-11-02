@@ -1,4 +1,14 @@
-<div class="w-100">
-  <app-filter-form></app-filter-form>
-  <app-default-table [dataSource]="repositories" *ngIf="!loading"></app-default-table>
-</div>
+<mat-card class="container-fluid min-vh-100 min-vw-100">
+  <mat-card-header>
+    <mat-icon> search</mat-icon>
+    <h1 class="align-self-center px-1"> Repofinder</h1>
+  </mat-card-header>
+  <mat-card-content>
+
+    <app-filter-form></app-filter-form>
+    <div *ngIf="loading" class="d-flex justify-content-center py-5">
+      <mat-spinner></mat-spinner>
+    </div>
+    <app-default-table *ngIf="!loading" [dataSource]="repositories"></app-default-table>
+  </mat-card-content>
+</mat-card>
