@@ -14,6 +14,9 @@ export class RepositoryService {
         const filterArchived = (filter.isArchived !== undefined && filter.isArchived !== null) ? repository.isArchived === filter.isArchived : true;
         let filterDate = true;
         if (filter.pushedAtStart) {
+          // console.log(filter.pushedAtStart);
+          // console.log(repository.pushedAt);
+          // console.log((this.compareDates(filter.pushedAtStart, repository.pushedAt) < 0));
           filterDate = this.compareDates(filter.pushedAtStart, repository.pushedAt) < 0
         }
         if (filter.pushedAtEnd) {
