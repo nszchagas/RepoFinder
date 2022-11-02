@@ -1,6 +1,6 @@
 const {writeFile} = require('fs');
 
-for (const prod in [true, false]) {
+for (const prod of [true, false]) {
   const environmentFileContent = `export const environment = {
    production: ${prod},
    gitToken: "${process.env['TOKEN']}",
