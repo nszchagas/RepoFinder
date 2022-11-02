@@ -37,7 +37,8 @@ jobs:
   deploy:
     needs: build
     runs-on: self-hosted
-      steps:
+      
+    steps:
         - name: Download artifacts created at previous job
           if: sucess()
           uses: actions/download-artifact@v1
